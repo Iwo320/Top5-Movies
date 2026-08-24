@@ -21,9 +21,9 @@ export const THEME = {
   },
   fps: 30,
   timing: {
-    introDurationInFrames: 120,
-    cardDurationInFrames: 240,
-    outroDurationInFrames: 100,
+    introDurationInFrames: 180,
+    cardDurationInFrames: 420,
+    outroDurationInFrames: 150,
   },
   animation: {
     fastInFrames: 12,
