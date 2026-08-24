@@ -1,0 +1,30 @@
+{
+  "name": "top5-movies",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Automated weekly TOP 5 movies video generator powered by TMDB and Remotion",
+  "scripts": {
+    "generate": "tsx src/generate.ts",
+    "render": "tsx src/render.ts",
+    "studio": "remotion studio",
+    "test": "tsx src/test.ts"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.0",
+    "@remotion/cli": "^4.0.0",
+    "@remotion/google-fonts": "^4.0.0",
+    "@remotion/renderer": "^4.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "dotenv": "^16.4.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}
