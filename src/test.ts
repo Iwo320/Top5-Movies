@@ -48,7 +48,7 @@ if (process.env.TMDB_API_KEY) {
 }
 
 console.log("[test] Project files");
-for (const f of ["src/index.ts", "src/Root.tsx", "src/Top5Weekly.tsx", "remotion.config.ts", "public/theme-music.mp3", ".github/workflows/weekly.yml"]) {
+for (const f of ["src/index.ts", "src/Root.tsx", "src/Top5Weekly.tsx", "remotion.config.ts", ".github/workflows/weekly.yml"]) {
   check(`${f} exists`, fs.existsSync(path.resolve(process.cwd(), f)));
 }
 

@@ -32,7 +32,6 @@ export const THEME = {
     exitFrames: 15,
     springConfig: { damping: 200, stiffness: 100, mass: 0.5 },
     popSpringConfig: { damping: 12, stiffness: 120, mass: 0.8 },
-    musicFadeOutFrames: 50,
   },
   spacing: {
     pageMarginX: 120,

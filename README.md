@@ -41,7 +41,6 @@ npm run generate -- --mock  # dane testowe bez TMDB
 npm run render            # renderuje MP4 → out/<YYYY-MM-DD>/top5-weekly-landscape.mp4
 npm run render -- --format portrait       # wersja pionowa 1080x1920
 npm run render -- --date 2026-08-24       # konkretny tydzień
-npm run music             # regeneruje ścieżkę muzyczną public/theme-music.mp3
 npm run studio            # podgląd w Remotion Studio
 npm test                  # testy integralności projektu
 ```
@@ -67,9 +66,7 @@ Sekrety nigdy nie są zapisywane w kodzie — tylko przez environment variables 
 
 ## Stały styl (theme)
 
-Wszystkie kolory, fonty, animacje, przejścia, spacing, layout, czasy scen i muzyka są zdefiniowane w jednym miejscu: [`src/theme/theme.ts`](src/theme/theme.ts) (+ [`src/theme/fonts.ts`](src/theme/fonts.ts)). Motyw: **pomarańczowo-czarno-biały**. Komponenty nie mają własnych „magicznych" wartości — zmiana theme zmienia wygląd wszystkich odcinków.
-
-Muzyka (procedurowo generowany utwór 128 BPM dopasowany do struktury scen) jest generowana przez `npm run music` do `public/theme-music.mp3` i dołączana do renderu z płynnym fade in/out.
+Wszystkie kolory, fonty, animacje, przejścia, spacing, layout i czasy scen są zdefiniowane w jednym miejscu: [`src/theme/theme.ts`](src/theme/theme.ts) (+ [`src/theme/fonts.ts`](src/theme/fonts.ts)). Motyw: **pomarańczowo-czarno-biały**. Komponenty nie mają własnych „magicznych" wartości — zmiana theme zmienia wygląd wszystkich odcinków.
 
 Przełączanie formatu odbywa się przez `--format` / `FORMAT`; oba formaty korzystają z tej samej kompozycji i theme (layout adaptuje się automatycznie).
 

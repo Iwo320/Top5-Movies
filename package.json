@@ -6,7 +6,6 @@
   "scripts": {
     "generate": "tsx src/generate.ts",
     "render": "tsx src/render.ts",
-    "music": "tsx src/audio/synth.ts",
     "studio": "remotion studio",
     "test": "tsx src/test.ts"
   },
