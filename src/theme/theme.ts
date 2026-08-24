@@ -1,15 +1,15 @@
 export const THEME = {
   colors: {
-    background: "#0B0C1E",
-    backgroundDeep: "#05060F",
-    surface: "#151730",
-    surfaceLight: "#1F2244",
-    primary: "#FF4757",
-    secondary: "#FFD32A",
-    accent: "#3DC1F3",
+    background: "#111111",
+    backgroundDeep: "#0A0A0A",
+    surface: "#1A1A1A",
+    surfaceLight: "#262626",
+    primary: "#FF7A00",
+    secondary: "#FFFFFF",
+    accent: "#FFB25C",
     text: "#FFFFFF",
-    textMuted: "#9BA0C8",
-    gold: "#FFC24B",
+    textMuted: "#B3B3B3",
+    gold: "#FFA51E",
   },
   fonts: {
     display: "Bebas Neue",
@@ -32,6 +32,7 @@ export const THEME = {
     exitFrames: 15,
     springConfig: { damping: 200, stiffness: 100, mass: 0.5 },
     popSpringConfig: { damping: 12, stiffness: 120, mass: 0.8 },
+    musicFadeOutFrames: 50,
   },
   spacing: {
     pageMarginX: 120,

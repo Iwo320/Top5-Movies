@@ -1,7 +1,9 @@
 import React from "react";
 import {
   AbsoluteFill,
+  Audio,
   Sequence,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
   interpolate,
@@ -27,8 +29,17 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
   );
 
+  const musicVolume = (f: number): number =>
+    interpolate(
+      f,
+      [0, 20, durationInFrames - THEME.animation.musicFadeOutFrames, durationInFrames - 2],
+      [0, 0.9, 0.75, 0],
+      { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+    );
+
   return (
     <AbsoluteFill style={{ backgroundColor: THEME.colors.backgroundDeep }}>
+      <Audio src={staticFile("theme-music.mp3")} volume={musicVolume} />
       <Sequence durationInFrames={introEnd} name="Intro">
         <Intro weekLabel={data.weekLabel} />
       </Sequence>
