@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fetchTop5Movies } from "./tmdb/client";
+import { fetchTop5Movies, polishWeekLabel } from "./tmdb/client";
 import { buildMockWeeklyData } from "./data/mock";
 import type { WeeklyData } from "./types";
 
@@ -19,20 +19,19 @@ const parseArgs = (argv: string[]) => {
   return args;
 };
 
-const weekLabel = (): string => new Date().toISOString().slice(0, 10);
+const isoDate = (): string => new Date().toISOString().slice(0, 10);
 
 const main = async () => {
   const args = parseArgs(process.argv);
   const useMock = args.get("mock") === "true";
-  const label = weekLabel();
+  const label = polishWeekLabel();
 
   let data: WeeklyData;
   if (useMock) {
     console.log("[generate] Running in MOCK mode (--mock). No TMDB calls.");
     data = buildMockWeeklyData();
-    data.weekLabel = label;
   } else {
-    console.log("[generate] Fetching weekly trending movies from TMDB...");
+    console.log("[generate] Pobieram cotygodniowe trendy z TMDB (pl-PL)...");
     data = {
       weekLabel: label,
       generatedAt: new Date().toISOString(),
@@ -41,17 +40,17 @@ const main = async () => {
     };
   }
 
-  const targetDir = path.join(OUT_DIR, label);
+  const targetDir = path.join(OUT_DIR, isoDate());
   await mkdir(targetDir, { recursive: true });
   const dataPath = path.join(targetDir, "data.json");
   await writeFile(dataPath, JSON.stringify(data, null, 2), "utf-8");
 
-  console.log(`[generate] Weekly data saved to ${dataPath}`);
+  console.log(`[generate] Dane tygodnia zapisane w ${dataPath}`);
   for (const m of data.movies) {
     console.log(
-      `  #${m.rank} ${m.title} (${m.releaseYear ?? "?"}) ★${m.voteAverage} — trailer: ${
-        m.trailerUrl ? "yes" : "MISSING"
-      }, poster: ${m.posterUrl ? "yes" : "MISSING"}`,
+      `  #${m.rank} ${m.title} (${m.releaseYear ?? "?"}) ★${m.voteAverage} — plakat: ${
+        m.posterUrl ? "tak" : "BRAK"
+      }`,
     );
   }
 };

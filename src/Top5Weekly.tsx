@@ -10,7 +10,6 @@ import { THEME, totalSequenceFrames } from "./theme/theme";
 import type { WeeklyData } from "./types";
 import { Intro } from "./components/Intro";
 import { MovieCard } from "./components/MovieCard";
-import { TrailerSegment } from "./components/TrailerSegment";
 import { Outro } from "./components/Outro";
 
 export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
@@ -33,31 +32,16 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
       <Sequence durationInFrames={introEnd} name="Intro">
         <Intro weekLabel={data.weekLabel} />
       </Sequence>
-      {movies.map((movie, i) => {
-        const start =
-          introEnd +
-          i *
-            (THEME.timing.cardDurationInFrames +
-              THEME.timing.trailerDurationInFrames);
-        return (
-          <React.Fragment key={`${movie.id}-${i}`}>
-            <Sequence
-              from={start}
-              durationInFrames={THEME.timing.cardDurationInFrames}
-              name={`#${movie.rank} ${movie.title}`}
-            >
-              <MovieCard movie={movie} />
-            </Sequence>
-            <Sequence
-              from={start + THEME.timing.cardDurationInFrames}
-              durationInFrames={THEME.timing.trailerDurationInFrames}
-              name={`Trailer #${movie.rank}`}
-            >
-              <TrailerSegment movie={movie} />
-            </Sequence>
-          </React.Fragment>
-        );
-      })}
+      {movies.map((movie, i) => (
+        <Sequence
+          key={`${movie.id}-${i}`}
+          from={introEnd + i * THEME.timing.cardDurationInFrames}
+          durationInFrames={THEME.timing.cardDurationInFrames}
+          name={`#${movie.rank} ${movie.title}`}
+        >
+          <MovieCard movie={movie} />
+        </Sequence>
+      ))}
       <Sequence
         from={outroStart}
         durationInFrames={THEME.timing.outroDurationInFrames}

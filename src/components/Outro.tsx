@@ -47,7 +47,7 @@ export const Outro: React.FC<{ weekLabel: string }> = ({ weekLabel }) => {
             transform: `scale(${titleSpring})`,
           }}
         >
-          THAT&apos;S A <span style={{ color: THEME.colors.primary }}>WRAP</span>
+          DO ZOBACZENIA
         </div>
         <div
           style={{
@@ -60,7 +60,7 @@ export const Outro: React.FC<{ weekLabel: string }> = ({ weekLabel }) => {
             textAlign: "center",
           }}
         >
-          SEE YOU NEXT WEEK
+          NOWE TOP 5 W KAŻDY PONIEDZIAŁEK
         </div>
         <div
           style={{
@@ -77,8 +77,8 @@ export const Outro: React.FC<{ weekLabel: string }> = ({ weekLabel }) => {
             padding: `0 ${80 * scaleUnit}px`,
           }}
         >
-          Data provided by TMDB. This product uses the TMDB API but is not
-          endorsed or certified by TMDB. · Week of {weekLabel}
+          Dane pochodzą z TMDB. Ten produkt korzysta z TMDB API, ale nie jest
+          wspierany ani certyfikowany przez TMDB. · Tydzień {weekLabel}
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

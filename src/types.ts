@@ -9,7 +9,6 @@ export interface MovieData {
   genreNames: string[];
   posterUrl: string | null;
   backdropUrl: string | null;
-  trailerUrl: string | null;
 }
 
 export interface WeeklyData {

@@ -1,75 +1,81 @@
 import type { MovieData, WeeklyData } from "../types";
 
-const MOCK_MOVIES: Array<Omit<MovieData, "rank" | "trailerUrl">> = [
+const MOCK_MOVIES: Array<Omit<MovieData, "rank">> = [
   {
     id: 1001,
-    title: "Midnight Horizon",
+    title: "Północny Horyzont",
     overview:
-      "A disgraced pilot takes one final flight across the polar night to deliver a vaccine before an unstoppable storm grounds every plane on Earth.",
+      "Zhańbiony pilot podejmuje ostatni lot przez polarną noc, aby dostarczyć szczepionkę, zanim niepowstrzymana burza unieruchomi wszystkie samoloty na Ziemi.",
     releaseYear: "2026",
     voteAverage: 8.4,
     popularity: 1420.55,
-    genreNames: ["Thriller", "Adventure"],
+    genreNames: ["Thriller", "Przygodowy"],
     posterUrl: null,
     backdropUrl: null,
   },
   {
     id: 1002,
-    title: "The Glass Archive",
+    title: "Szklane Archiwum",
     overview:
-      "An archivist discovers that a sealed wing of the national library contains memories recorded in glass, and someone is erasing them one by one.",
+      "Archiwista odkrywa, że w zamkniętym skrzydle biblioteki narodowej przechowywane są wspomnienia zapisane w szkle — a ktoś kasuje je jedno po drugim.",
     releaseYear: "2025",
     voteAverage: 7.9,
     popularity: 1180.2,
-    genreNames: ["Mystery", "Drama"],
+    genreNames: ["Tajemnica", "Dramat"],
     posterUrl: null,
     backdropUrl: null,
   },
   {
     id: 1003,
-    title: "Neon Delta",
+    title: "Neonowa Delta",
     overview:
-      "In a flooded megacity, a courier with a mechanical heart gets tangled in a heist that could buy her freedom — or sink the city for good.",
+      "W zalanym megamieście kurierka z mechanicznym sercem wikła się w skok, który może kupić jej wolność — albo zatopić miasto na dobre.",
     releaseYear: "2026",
     voteAverage: 7.6,
     popularity: 990.4,
-    genreNames: ["Science Fiction", "Action"],
+    genreNames: ["Science Fiction", "Akcja"],
     posterUrl: null,
     backdropUrl: null,
   },
   {
     id: 1004,
-    title: "Letters from the Lighthouse",
+    title: "Listy z Latarni",
     overview:
-      "Two strangers exchange letters through a lighthouse that somehow delivers mail forty years into the past.",
+      "Dwoje nieznajomych wymienia listy przez latarnię morską, która w jakikolwiek sposób dostarcza pocztę czterdzieści lat w przeszłość.",
     releaseYear: "2024",
     voteAverage: 8.1,
     popularity: 870.75,
-    genreNames: ["Romance", "Fantasy"],
+    genreNames: ["Romans", "Fantasy"],
     posterUrl: null,
     backdropUrl: null,
   },
   {
     id: 1005,
-    title: "Kings of the Static",
+    title: "Królowie Statyki",
     overview:
-      "A pirate radio crew broadcasting from an abandoned subway station becomes the only voice a city trusts when the grid goes dark.",
+      "Załoga pirackiego radia nadającego z opuszczonej stacji metra staje się jedynym głosem, któremu miasto ufa, gdy sieć gaśnie.",
     releaseYear: "2025",
     voteAverage: 7.3,
     popularity: 640.15,
-    genreNames: ["Crime", "Music"],
+    genreNames: ["Kryminał", "Muzyka"],
     posterUrl: null,
     backdropUrl: null,
   },
 ];
 
+export const polishWeekLabel = (): string =>
+  new Intl.DateTimeFormat("pl-PL", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(new Date());
+
 export const buildMockWeeklyData = (): WeeklyData => ({
-  weekLabel: new Date().toISOString().slice(0, 10),
+  weekLabel: polishWeekLabel(),
   generatedAt: new Date().toISOString(),
   source: "mock",
   movies: MOCK_MOVIES.map((m, i) => ({
     ...m,
     rank: i + 1,
-    trailerUrl: i === 3 ? null : `https://www.youtube.com/watch?v=dQw4w9WgXcQ`,
   })),
 });

@@ -7,10 +7,11 @@ Automatyczny generator cotygodniowych filmów wideo **TOP 5 najpopularniejszych 
 
 ## Struktura filmu
 
-1. Dynamiczne intro („TOP 5 — MOVIES OF THE WEEK")
+1. Dynamiczne intro („TOP 5 — FILMY TYGODNIA")
 2. Pozycje **#5 → #1**: plakat, tytuł, rok, gatunki, ocena TMDB, opis, popularność
-3. Segment trailera dla każdego filmu (animowane tło + przycisk play + link; jeśli trailer nie istnieje — czytelny placeholder)
-4. Outro z atrybucją TMDB
+3. Outro („DO ZOBACZENIA") z atrybucją TMDB
+
+Całość **w języku polskim** — dane (opisy, gatunki) pobierane są z TMDB z `language=pl-PL`.
 
 ## Wymagania
 
@@ -73,7 +74,7 @@ Przełączanie formatu odbywa się przez `--format` / `FORMAT`; oba formaty korz
 
 - brak klucza TMDB → czytelny błąd z instrukcją,
 - TMDB niedostępny / błąd HTTP → komunikat i exit code 1,
-- brak trailera lub plakatu → stylizowany placeholder (render się nie wysypuje),
+- brak plakatu → stylizowany placeholder (render się nie wysypuje),
 - brak szczegółów filmu → fallback na dane z listy trendów.
 
 ## Licencje / atrybucja

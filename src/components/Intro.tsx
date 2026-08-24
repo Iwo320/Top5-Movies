@@ -99,7 +99,7 @@ export const Intro: React.FC<{ weekLabel: string }> = ({ weekLabel }) => {
             color: THEME.colors.secondary,
           }}
         >
-          MOVIES OF THE WEEK
+          FILMY TYGODNIA
         </div>
         <div
           style={{
@@ -112,7 +112,7 @@ export const Intro: React.FC<{ weekLabel: string }> = ({ weekLabel }) => {
             color: THEME.colors.textMuted,
           }}
         >
-          WEEK OF {weekLabel}
+          TYDZIEŃ {weekLabel}
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

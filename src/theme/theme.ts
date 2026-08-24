@@ -22,8 +22,7 @@ export const THEME = {
   fps: 30,
   timing: {
     introDurationInFrames: 120,
-    cardDurationInFrames: 210,
-    trailerDurationInFrames: 240,
+    cardDurationInFrames: 240,
     outroDurationInFrames: 100,
   },
   animation: {
@@ -47,6 +46,5 @@ export type Theme = typeof THEME;
 
 export const totalSequenceFrames = (movieCount: number): number =>
   THEME.timing.introDurationInFrames +
-  movieCount *
-    (THEME.timing.cardDurationInFrames + THEME.timing.trailerDurationInFrames) +
+  movieCount * THEME.timing.cardDurationInFrames +
   THEME.timing.outroDurationInFrames;

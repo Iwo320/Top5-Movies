@@ -125,7 +125,7 @@ export const MovieCard: React.FC<{ movie: MovieData }> = ({ movie }) => {
                 opacity: rankSpring,
               }}
             >
-              #{movie.rank} THIS WEEK
+              #{movie.rank} TYGODNIA
             </div>
             <div
               style={{
@@ -175,17 +175,17 @@ export const MovieCard: React.FC<{ movie: MovieData }> = ({ movie }) => {
                 overflow: "hidden",
               }}
             >
-              {movie.overview || "No synopsis available for this title."}
+              {movie.overview || "Brak opisu tego filmu."}
             </div>
 
             <MeterRow
-              label="TMDB RATING"
+              label="OCENA TMDB"
               value={`${ratingFill.toFixed(1)} / 10`}
               fill={ratingFill / 10}
               scaleUnit={scaleUnit}
             />
             <MeterRow
-              label="POPULARITY"
+              label="POPULARNOŚĆ"
               value={Math.round(movie.popularity).toLocaleString("en-US")}
               fill={popFill}
               scaleUnit={scaleUnit}

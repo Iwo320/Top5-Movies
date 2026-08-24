@@ -27,7 +27,7 @@ console.log("[test] Duration math");
 const frames5 = totalSequenceFrames(5);
 const expected =
   THEME.timing.introDurationInFrames +
-  5 * (THEME.timing.cardDurationInFrames + THEME.timing.trailerDurationInFrames) +
+  5 * THEME.timing.cardDurationInFrames +
   THEME.timing.outroDurationInFrames;
 check(`5 movies => ${expected} frames (~${Math.round(expected / THEME.fps)}s)`, frames5 === expected);
 
@@ -36,10 +36,7 @@ const mock = buildMockWeeklyData();
 check("mock has 5 movies", mock.movies.length === 5);
 check("ranks are 1..5", mock.movies.every((m, i) => m.rank === i + 1));
 check("mock movies have titles", mock.movies.every((m) => m.title.length > 0));
-check(
-  "missing-trailer case represented",
-  mock.movies.some((m) => m.trailerUrl === null),
-);
+check("no trailer fields remain", mock.movies.every((m) => !("trailerUrl" in m)));
 
 console.log("[test] Environment");
 const envPath = path.resolve(process.cwd(), ".env.example");
