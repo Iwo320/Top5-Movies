@@ -22,7 +22,7 @@ npm i
 **Start Preview**
 
 ```console
-npm run dev
+npx remotion studio
 ```
 
 **Render video**
