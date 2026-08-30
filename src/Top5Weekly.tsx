@@ -5,16 +5,19 @@ import {
   useCurrentFrame,
   useVideoConfig,
   interpolate,
+  Audio,
 } from "remotion";
 import { THEME, totalSequenceFrames } from "./theme/theme";
 import type { WeeklyData } from "./types";
 import { Intro } from "./components/Intro";
 import { MovieCard } from "./components/MovieCard";
 import { Outro } from "./components/Outro";
+import backgroundMp3 from "./audio.mp3";
 
 export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
 
   const movies = data.movies.slice(0, 5);
   const introEnd = THEME.timing.introDurationInFrames;
@@ -29,6 +32,12 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: THEME.colors.backgroundDeep }}>
+      <Audio
+        src={backgroundMp3}
+        loop
+        autoplay
+        volume={0.5}
+      />
       <Sequence durationInFrames={introEnd} name="Intro">
         <Intro weekLabel={data.weekLabel} />
       </Sequence>

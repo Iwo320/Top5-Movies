@@ -7,9 +7,7 @@ import {
   useVideoConfig,
   interpolate,
   Easing,
-  Audio,
 } from "remotion";
-import backgroundMp3 from "../audio.mp3";
 import { THEME } from "../theme/theme";
 import { DISPLAY_FONT, BODY_FONT } from "../theme/fonts";
 import { AnimatedBackground } from "./AnimatedBackground";
@@ -38,12 +36,6 @@ export const Intro: React.FC<{ weekLabel: string }> = ({ weekLabel }) => {
 
   return (
     <AbsoluteFill>
-      <Audio
-        src={backgroundMp3}
-        loop
-        autoplay
-        volume={0.5}
-      />
       <AnimatedBackground />
       <AbsoluteFill
         style={{
