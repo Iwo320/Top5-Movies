@@ -39,9 +39,11 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
     movieDurations[movieDurations.length - 1] +
     THEME.timing.sceneGapInFrames;
 
-  const isVoiceoverFrame = (currentFrame: number) =>
+  const isDuckedFrame = (currentFrame: number) =>
     movieStarts.some(
-      (start, i) => currentFrame >= start && currentFrame < start + movieDurations[i],
+      (start, i) =>
+        currentFrame >= start &&
+        currentFrame < start + movieDurations[i] + THEME.timing.sceneGapInFrames,
     );
 
   const globalFade = interpolate(
@@ -56,7 +58,7 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
       <Audio
         src={backgroundMp3}
         loop
-        volume={(currentFrame) => (isVoiceoverFrame(currentFrame) ? 0.05 : 0.5)}
+        volume={(currentFrame) => (isDuckedFrame(currentFrame) ? 0.05 : 0.5)}
       />
       <Sequence durationInFrames={introEnd} name="Intro">
         <Intro weekLabel={data.weekLabel} />
