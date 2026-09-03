@@ -31,6 +31,26 @@ npx remotion studio
 npx remotion render
 ```
 
+## Free weekly automation
+
+The workflow in `.github/workflows/weekly-video.yml` runs every Sunday and can also
+be started manually. It uses the free local Piper TTS model with a Polish voice, so
+it does not require ElevenLabs credits or an API key.
+
+Add only `TMDB_API_KEY` under the repository's **Settings > Secrets and variables >
+Actions**. The workflow downloads Piper, generates the voiceovers, renders the MP4,
+and uploads it as a 30-day workflow artifact.
+
+For local generation:
+
+```console
+python3 -m pip install --user piper-tts
+python3 -m piper.download_voices pl_PL-gosia-medium --download-dir .piper
+PIPER_MODEL="$PWD/.piper/pl_PL-gosia-medium.onnx" npm run generate
+npm run generate:voiceovers
+npm run render
+```
+
 **Upgrade Remotion**
 
 ```console

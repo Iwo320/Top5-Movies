@@ -5,6 +5,7 @@
   "description": "Automated weekly TOP 5 movies video generator powered by TMDB and Remotion",
   "scripts": {
     "generate": "tsx src/generate.ts",
+    "generate:voiceovers": "tsx scripts/generateVoiceovers.ts",
     "render": "tsx src/render.ts",
     "studio": "remotion studio",
     "test": "tsx src/test.ts"

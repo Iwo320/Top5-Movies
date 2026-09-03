@@ -35,7 +35,6 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
       <Audio
         src={backgroundMp3}
         loop
-        autoplay
         volume={0.5}
       />
       <Sequence durationInFrames={introEnd} name="Intro">
@@ -48,6 +47,7 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
           durationInFrames={THEME.timing.cardDurationInFrames}
           name={`#${movie.rank} ${movie.title}`}
         >
+          <Audio src={`/${movie.id}.mp3`} volume={0.5} />
           <MovieCard movie={movie} />
         </Sequence>
       ))}

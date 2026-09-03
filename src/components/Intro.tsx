@@ -1,5 +1,4 @@
 import React from "react";
-import { useUnits } from "remotion";
 import {
   AbsoluteFill,
   spring,
