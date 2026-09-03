@@ -71,7 +71,7 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
           name={`#${movie.rank} ${movie.title}`}
         >
           <Audio src={staticFile(`${movie.id}.mp3`)} volume={1} />
-          <Freeze frame={30}>
+          <Freeze frame={100}>
             <MovieCard movie={movie} />
           </Freeze>
         </Sequence>
