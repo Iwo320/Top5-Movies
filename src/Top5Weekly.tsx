@@ -6,6 +6,7 @@ import {
   useVideoConfig,
   interpolate,
   Audio,
+  Freeze,
   staticFile,
 } from "remotion";
 import { THEME, totalSequenceFrames } from "./theme/theme";
@@ -22,7 +23,19 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
 
   const movies = data.movies.slice(0, 5);
   const introEnd = THEME.timing.introDurationInFrames;
-  const outroStart = durationInFrames - THEME.timing.outroDurationInFrames;
+  const movieDurations = movies.map(
+    (movie) => movie.voiceoverDurationInFrames ?? THEME.timing.cardDurationInFrames,
+  );
+  const movieStarts = movieDurations.reduce<number[]>((starts, duration, i) => {
+    starts.push(i === 0 ? introEnd : starts[i - 1] + movieDurations[i - 1]);
+    return starts;
+  }, []);
+  const outroStart = introEnd + movieDurations.reduce((sum, duration) => sum + duration, 0);
+
+  const isVoiceoverFrame = (currentFrame: number) =>
+    movieStarts.some(
+      (start, i) => currentFrame >= start && currentFrame < start + movieDurations[i],
+    );
 
   const globalFade = interpolate(
     frame,
@@ -36,7 +49,7 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
       <Audio
         src={backgroundMp3}
         loop
-        volume={0.5}
+        volume={(currentFrame) => (isVoiceoverFrame(currentFrame) ? 0.05 : 0.5)}
       />
       <Sequence durationInFrames={introEnd} name="Intro">
         <Intro weekLabel={data.weekLabel} />
@@ -44,12 +57,14 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
       {movies.map((movie, i) => (
         <Sequence
           key={`${movie.id}-${i}`}
-          from={introEnd + i * THEME.timing.cardDurationInFrames}
-          durationInFrames={THEME.timing.cardDurationInFrames}
+          from={movieStarts[i]}
+          durationInFrames={movieDurations[i]}
           name={`#${movie.rank} ${movie.title}`}
         >
-          <Audio src={staticFile(`${movie.id}.mp3`)} volume={0.5} />
-          <MovieCard movie={movie} />
+          <Audio src={staticFile(`${movie.id}.mp3`)} volume={1} />
+          <Freeze frame={30}>
+            <MovieCard movie={movie} />
+          </Freeze>
         </Sequence>
       ))}
       <Sequence
@@ -65,5 +80,8 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
 };
 
 export const calculateTop5Metadata = ({ data }: { data: WeeklyData }) => ({
-  durationInFrames: totalSequenceFrames(Math.min(data.movies.length, 5)),
+  durationInFrames: totalSequenceFrames(
+    Math.min(data.movies.length, 5),
+    data.movies.slice(0, 5).map((movie) => movie.voiceoverDurationInFrames),
+  ),
 });

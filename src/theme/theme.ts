@@ -44,7 +44,12 @@ export const THEME = {
 
 export type Theme = typeof THEME;
 
-export const totalSequenceFrames = (movieCount: number): number =>
+export const totalSequenceFrames = (
+  movieCount: number,
+  voiceoverDurations?: Array<number | undefined>,
+): number =>
   THEME.timing.introDurationInFrames +
-  movieCount * THEME.timing.cardDurationInFrames +
+  Array.from({ length: movieCount }, (_, i) =>
+    voiceoverDurations?.[i] ?? THEME.timing.cardDurationInFrames,
+  ).reduce((total, duration) => total + duration, 0) +
   THEME.timing.outroDurationInFrames;

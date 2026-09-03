@@ -1,5 +1,6 @@
 import "dotenv/config";
-import { spawn } from "node:child_process";
+import { execFile as nodeExecFile, spawn } from "node:child_process";
+import { promisify } from "node:util";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { WeeklyData } from "../src/types";
@@ -8,6 +9,7 @@ const OUT_DIR = path.resolve(process.cwd(), "out");
 const PUBLIC_DIR = path.resolve(process.cwd(), "public");
 const MODEL = process.env.PIPER_MODEL ?? "pl_PL-gosia-medium.onnx";
 const PIPER_BIN = process.env.PIPER_BIN ?? "piper";
+const execFile = promisify(nodeExecFile);
 
 const run = (command: string, args: string[], input: string): Promise<void> =>
   new Promise((resolve, reject) => {
@@ -42,9 +44,15 @@ const main = async () => {
     const mp3Path = path.join(PUBLIC_DIR, `${movie.id}.mp3`);
     await run(PIPER_BIN, ["--model", MODEL, "--output_file", wavPath], movie.overview);
     await run("ffmpeg", ["-y", "-i", wavPath, "-codec:a", "libmp3lame", "-b:a", "128k", mp3Path], "");
+    const { stdout } = await execFile("ffprobe", [
+      "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", mp3Path,
+    ]);
+    movie.voiceoverDurationInFrames = Math.ceil(Number(stdout.trim()) * 30) + 15;
     await import("node:fs/promises").then(({ unlink }) => unlink(wavPath));
     console.log(`[voiceovers] Generated ${movie.id}.mp3`);
   }
+
+  await writeFile(dataPath, JSON.stringify(data, null, 2), "utf8");
 };
 
 main().catch((error) => {

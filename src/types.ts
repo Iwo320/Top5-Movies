@@ -9,6 +9,7 @@ export interface MovieData {
   genreNames: string[];
   posterUrl: string | null;
   backdropUrl: string | null;
+  voiceoverDurationInFrames?: number;
 }
 
 export interface WeeklyData {
