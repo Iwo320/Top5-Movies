@@ -47,7 +47,7 @@ For local generation:
 python3 -m pip install --user piper-tts
 python3 -m piper.download_voices pl_PL-gosia-medium --download-dir .piper
 PIPER_MODEL="$PWD/.piper/pl_PL-gosia-medium.onnx" npm run generate
-npm run generate:voiceovers
+PIPER_MODEL="$PWD/.piper/pl_PL-gosia-medium.onnx" npm run generate:voiceovers
 npm run render
 ```
 

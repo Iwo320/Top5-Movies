@@ -36,9 +36,7 @@ jobs:
           python3 -m piper.download_voices pl_PL-gosia-medium --download-dir "$HOME/.local/share/piper"
 
       - name: Generate Polish voiceovers
-        env:
-          PIPER_MODEL: "$HOME/.local/share/piper/pl_PL-gosia-medium.onnx"
-        run: npm run generate:voiceovers
+        run: PIPER_MODEL="$HOME/.local/share/piper/pl_PL-gosia-medium.onnx" npm run generate:voiceovers
 
       - name: Render video
         env:
