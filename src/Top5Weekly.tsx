@@ -6,6 +6,7 @@ import {
   useVideoConfig,
   interpolate,
   Audio,
+  staticFile,
 } from "remotion";
 import { THEME, totalSequenceFrames } from "./theme/theme";
 import type { WeeklyData } from "./types";
@@ -47,7 +48,7 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
           durationInFrames={THEME.timing.cardDurationInFrames}
           name={`#${movie.rank} ${movie.title}`}
         >
-          <Audio src={`/${movie.id}.mp3`} volume={0.5} />
+          <Audio src={staticFile(`${movie.id}.mp3`)} volume={0.5} />
           <MovieCard movie={movie} />
         </Sequence>
       ))}
