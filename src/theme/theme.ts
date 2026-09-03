@@ -24,6 +24,7 @@ export const THEME = {
     introDurationInFrames: 180,
     cardDurationInFrames: 420,
     outroDurationInFrames: 150,
+    sceneGapInFrames: 15,
   },
   animation: {
     fastInFrames: 12,
@@ -49,6 +50,7 @@ export const totalSequenceFrames = (
   voiceoverDurations?: Array<number | undefined>,
 ): number =>
   THEME.timing.introDurationInFrames +
+  (movieCount + 1) * THEME.timing.sceneGapInFrames +
   Array.from({ length: movieCount }, (_, i) =>
     voiceoverDurations?.[i] ?? THEME.timing.cardDurationInFrames,
   ).reduce((total, duration) => total + duration, 0) +

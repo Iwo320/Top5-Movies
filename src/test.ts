@@ -27,6 +27,7 @@ console.log("[test] Duration math");
 const frames5 = totalSequenceFrames(5);
 const expected =
   THEME.timing.introDurationInFrames +
+  6 * THEME.timing.sceneGapInFrames +
   5 * THEME.timing.cardDurationInFrames +
   THEME.timing.outroDurationInFrames;
 check(`5 movies => ${expected} frames (~${Math.round(expected / THEME.fps)}s)`, frames5 === expected);

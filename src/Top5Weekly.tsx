@@ -27,10 +27,17 @@ export const Top5Weekly: React.FC<{ data: WeeklyData }> = ({ data }) => {
     (movie) => movie.voiceoverDurationInFrames ?? THEME.timing.cardDurationInFrames,
   );
   const movieStarts = movieDurations.reduce<number[]>((starts, duration, i) => {
-    starts.push(i === 0 ? introEnd : starts[i - 1] + movieDurations[i - 1]);
+    starts.push(
+      i === 0
+        ? introEnd + THEME.timing.sceneGapInFrames
+        : starts[i - 1] + movieDurations[i - 1] + THEME.timing.sceneGapInFrames,
+    );
     return starts;
   }, []);
-  const outroStart = introEnd + movieDurations.reduce((sum, duration) => sum + duration, 0);
+  const outroStart =
+    movieStarts[movieStarts.length - 1] +
+    movieDurations[movieDurations.length - 1] +
+    THEME.timing.sceneGapInFrames;
 
   const isVoiceoverFrame = (currentFrame: number) =>
     movieStarts.some(
